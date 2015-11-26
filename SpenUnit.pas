@@ -1,7 +1,7 @@
 unit SpenUnit;
 
 interface
-                
+               
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, XPMan, Grids;
@@ -290,7 +290,11 @@ procedure TForm1.DoneButtonClick(Sender: TObject);
              SearchStatus.Condition:='W';
             if pos('Cycle',ProcessingArea.AreaName)<>0 then
              SetPreviousStatus();
-           end
+           end;
+     '/' : begin
+            if SearchStatus.Condition='R' then
+             SearchStatus.Condition:='W';
+           end;
      else
       AddToIdentifierList(IdentifierList,Token,SearchStatus);
     end;
@@ -337,6 +341,7 @@ procedure TForm1.DoneButtonClick(Sender: TObject);
      'D' : ExecuteUnusebleCode(CodeLine,'"');
     end;
    end;
+   TransformedCode:=TransformedCode+'/n ';
   end;
   SearchStatus.Condition:='W';
   SearchStatus.CycleNumber:=1;
